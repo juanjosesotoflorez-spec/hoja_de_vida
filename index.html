@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoja de vida – Juan José Soto Flórez (edición retro)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color1: #0B132B;
+    --color2: #1C2541;
+    --color3: #3A506B;
+    --color4: #5BC0BE;
+    --color5: #6FFFE9;
+    --texto: #E3ECF5;
+    --texto-suave: #9FB2C7;
+    --fondo-pagina: #05091A;
+    --pixel: "Press Start 2P", "Courier New", monospace;
+    --cuerpo: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    font-family: var(--cuerpo);
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: var(--texto);
+    background: var(--fondo-pagina);
+    padding: 24px 12px;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--color5); outline-offset: 2px; }
+
+  /* ---------- Hoja ---------- */
+  .hoja {
+    position: relative;
+    width: 210mm;
+    min-height: 297mm;
+    max-width: 100%;
+    margin: 0 auto;
+    background: var(--color1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px var(--color3), 0 0 40px rgba(91, 192, 190, 0.35);
+  }
+
+  /* Efecto CRT: líneas de barrido muy sutiles sobre toda la hoja */
+  .hoja::after {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.16) 3px
+    );
+    z-index: 10;
+  }
+
+  /* ---------- Encabezado: horizonte synthwave ---------- */
+  .encabezado {
+    position: relative;
+    padding: 11mm 12mm 0;
+    background: linear-gradient(to bottom, var(--color1) 0%, var(--color2) 100%);
+    overflow: hidden;
+    min-height: 74mm;
+  }
+
+  .sol {
+    position: absolute;
+    right: 50mm;
+    bottom: 17mm;
+    width: 46mm; height: 46mm;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, var(--color5) 0%, var(--color4) 55%, var(--color3) 100%);
+    /* franjas horizontales que se ensanchan hacia abajo */
+    -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0, #000 5mm, transparent 5mm, transparent 5.8mm);
+            mask-image: repeating-linear-gradient(to bottom, #000 0, #000 5mm, transparent 5mm, transparent 5.8mm);
+    box-shadow: 0 0 30px rgba(111, 255, 233, 0.5);
+    opacity: 0.9;
+  }
+
+  .suelo {
+    position: absolute;
+    left: -20%; right: -20%; bottom: 0;
+    height: 19mm;
+    background: var(--color1);
+    border-top: 2px solid var(--color5);
+    box-shadow: 0 -2px 14px var(--color5);
+    perspective: 60mm;
+    overflow: hidden;
+  }
+  .suelo::before {
+    content: "";
+    position: absolute;
+    left: -50%; right: -50%; top: 0; height: 200%;
+    transform-origin: top center;
+    transform: rotateX(62deg);
+    background:
+      repeating-linear-gradient(to right, rgba(91, 192, 190, 0.75) 0, rgba(91, 192, 190, 0.75) 1px, transparent 1px, transparent 14mm),
+      repeating-linear-gradient(to bottom, rgba(91, 192, 190, 0.75) 0, rgba(91, 192, 190, 0.75) 1px, transparent 1px, transparent 9mm);
+  }
+
+  .encabezado-contenido { position: relative; z-index: 2; display: flex; gap: 8mm; align-items: flex-start; justify-content: space-between; }
+
+  h1 {
+    font-family: var(--pixel);
+    font-weight: 400;
+    font-size: 17pt;
+    line-height: 1.45;
+    color: #fff;
+    text-shadow: 0 0 6px var(--color5), 0 0 18px var(--color4);
+  }
+  .cargo {
+    margin-top: 4mm;
+    font-family: var(--pixel);
+    font-size: 6.5pt;
+    line-height: 1.8;
+    color: var(--color5);
+    max-width: 105mm;
+  }
+
+  .logo {
+    flex: 0 0 auto;
+    position: relative;
+    width: 28mm; height: 28mm;
+    display: grid; place-items: center;
+    background: rgba(5, 9, 26, 0.55);
+    border: 2px solid var(--color4);
+    box-shadow: 0 0 12px rgba(91, 192, 190, 0.6), inset 0 0 12px rgba(91, 192, 190, 0.2);
+    overflow: hidden;
+  }
+  .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .logo-texto { font-family: var(--pixel); font-size: 15pt; color: var(--color5); text-shadow: 0 0 8px var(--color5); }
+
+  /* Franja de contacto, pegada al horizonte */
+  .contacto-banda {
+    background: var(--color2);
+    border-bottom: 2px solid var(--color3);
+    padding: 3.5mm 12mm;
+  }
+  .contacto { display: flex; flex-wrap: wrap; gap: 1.5mm 7mm; font-size: 9.5pt; list-style: none; }
+  .contacto li { display: flex; gap: 6px; }
+  .contacto .rotulo { color: var(--color5); font-weight: 600; }
+  .contacto .vacio { color: var(--texto-suave); font-style: italic; }
+
+  /* ---------- Cuerpo ---------- */
+  .cuerpo { display: grid; grid-template-columns: 1fr 62mm; flex: 1; }
+  .principal { padding: 8mm 8mm 10mm 12mm; }
+  .lateral {
+    padding: 8mm 8mm 10mm 7mm;
+    background: rgba(28, 37, 65, 0.7);
+    border-left: 2px solid var(--color3);
+  }
+
+  section + section { margin-top: 6.5mm; }
+
+  h2 {
+    font-family: var(--pixel);
+    font-weight: 400;
+    font-size: 8pt;
+    line-height: 1.6;
+    color: var(--color5);
+    margin-bottom: 3.5mm;
+    padding-bottom: 2mm;
+    border-bottom: 2px solid var(--color3);
+    text-shadow: 0 0 8px rgba(111, 255, 233, 0.55);
+  }
+  h3 { font-weight: 600; }
+
+  .perfil p { max-width: 68ch; }
+
+  /* ---------- Proyecto como ventana de arcade ---------- */
+  .ventana {
+    border: 2px solid var(--color4);
+    background: var(--color2);
+    box-shadow: 4px 4px 0 var(--color3), 0 0 16px rgba(91, 192, 190, 0.35);
+  }
+  .ventana-barra {
+    display: flex; align-items: center; gap: 5px;
+    background: var(--color4);
+    padding: 1.5mm 3mm;
+  }
+  .ventana-barra i { width: 8px; height: 8px; background: var(--color1); display: block; }
+  .ventana-barra span { margin-left: auto; font-family: var(--pixel); font-size: 5.5pt; color: var(--color1); }
+  .ventana-cuerpo { padding: 5mm; }
+  .ventana h3 { font-family: var(--pixel); font-weight: 400; font-size: 10pt; line-height: 1.5; color: #fff; text-shadow: 0 0 8px var(--color4); }
+  .tipo { color: var(--texto-suave); font-size: 9.5pt; margin-top: 1.5mm; }
+  .ventana ul.puntos { margin: 3mm 0 0 4mm; }
+  .ventana ul.puntos li { margin-bottom: 1.2mm; }
+  .ventana ul.puntos li::marker { color: var(--color5); }
+
+  .tecnologias { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3.5mm; list-style: none; }
+  .tecnologias li {
+    font-size: 8.5pt; font-weight: 600;
+    padding: 0 8px;
+    border: 1px solid var(--color4);
+    color: var(--color5);
+    background: rgba(11, 19, 43, 0.6);
+  }
+  .enlace-proyecto {
+    display: inline-block; margin-top: 3.5mm;
+    font-weight: 600; font-size: 9.5pt;
+    color: var(--color5);
+    border-bottom: 1px solid var(--color4);
+  }
+
+  /* ---------- Educación ---------- */
+  .item { position: relative; padding-left: 5mm; border-left: 2px solid var(--color3); }
+  .item + .item { margin-top: 4.5mm; }
+  .item::before {
+    content: "";
+    position: absolute; left: -6px; top: 5px;
+    width: 10px; height: 10px;
+    background: var(--color5);
+    box-shadow: 0 0 8px var(--color5);
+  }
+  .item-cabecera { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+  .item h3 { font-size: 10.5pt; color: #fff; }
+  .fecha {
+    font-size: 9pt; font-weight: 600;
+    color: var(--color1);
+    background: var(--color5);
+    padding: 0 8px; white-space: nowrap;
+  }
+  .lugar { color: var(--texto-suave); font-size: 10pt; margin-top: 0.5mm; }
+
+  /* ---------- Aprendiendo ---------- */
+  .aprendizaje { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 6mm; list-style: none; }
+  .aprendizaje li { position: relative; padding-left: 14px; font-size: 10pt; }
+  .aprendizaje li::before {
+    content: "";
+    position: absolute; left: 0; top: 0.5em;
+    width: 7px; height: 7px;
+    background: var(--color4);
+    box-shadow: 0 0 6px var(--color4);
+  }
+
+  /* ---------- Lateral ---------- */
+  .grupo + .grupo { margin-top: 4mm; }
+  .grupo h3 { font-size: 9.5pt; color: var(--texto-suave); margin-bottom: 1.8mm; }
+  .etiquetas { display: flex; flex-wrap: wrap; gap: 4px; list-style: none; }
+  .etiquetas li {
+    font-size: 9pt; font-weight: 600;
+    padding: 1px 8px;
+    background: var(--color1);
+    color: var(--color5);
+    border: 1px solid var(--color3);
+  }
+
+  .blandas { list-style: none; }
+  .blandas li { position: relative; padding-left: 13px; margin-bottom: 1.6mm; font-size: 9.8pt; }
+  .blandas li::before {
+    content: "";
+    position: absolute; left: 0; top: 0.5em;
+    width: 6px; height: 6px;
+    background: var(--color4);
+  }
+  .idiomas p { font-size: 9.8pt; color: var(--texto-suave); }
+
+  /* ---------- Pantallas pequeñas ---------- */
+  @media (max-width: 800px) {
+    .hoja { width: 100%; min-height: 0; }
+    .encabezado { padding: 24px 20px 0; min-height: 0; padding-bottom: 90px; }
+    .encabezado-contenido { flex-direction: column-reverse; }
+    .sol { width: 90px; height: 90px; bottom: 50px; right: 20px; }
+    .suelo { height: 50px; }
+    h1 { font-size: 13pt; }
+    .contacto-banda { padding: 14px 20px; }
+    .cuerpo { grid-template-columns: 1fr; }
+    .principal, .lateral { padding: 24px 20px; }
+    .aprendizaje { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Impresión / PDF ---------- */
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: none; padding: 0; font-size: 10pt; }
+    .hoja { box-shadow: none; width: 210mm; min-height: 297mm; }
+    .cuerpo { grid-template-columns: 1fr 62mm; }
+    .ventana, .item, .grupo { break-inside: avoid; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .logo-texto { animation: parpadeo 4s steps(1) infinite; }
+    @keyframes parpadeo { 0%, 92%, 96% { opacity: 1; } 94%, 98% { opacity: 0.55; } }
+  }
+</style>
+</head>
+<body>
+
+<main class="hoja">
+
+  <!-- ===== ENCABEZADO ===== -->
+  <header>
+    <div class="encabezado">
+      <div class="sol" aria-hidden="true"></div>
+      <div class="suelo" aria-hidden="true"></div>
+
+      <div class="encabezado-contenido">
+        <div>
+          <h1>Juan José<br>Soto Flórez</h1>
+          <p class="cargo">Desarrollador de software junior<br>Web y bases de datos</p>
+        </div>
+
+        <!-- LOGO PERSONAL: reemplaza las iniciales por tu imagen, por ejemplo:
+             <img src="logo.png" alt="Logo de Juan José Soto Flórez"> -->
+        <div class="logo" aria-label="Espacio para el logo personal">
+          <span class="logo-texto">JS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contacto-banda">
+      <ul class="contacto">
+        <li><span class="rotulo">Teléfono</span> <span class="vacio">[Tu número de teléfono]</span></li>
+        <li><span class="rotulo">Correo</span> <span class="vacio">[tucorreo@ejemplo.com]</span></li>
+        <li><span class="rotulo">Ciudad</span> <span>Medellín, Colombia</span></li>
+        <li><span class="rotulo">GitHub</span> <a href="https://github.com/juanjosesotoflorez-spec">github.com/juanjosesotoflorez-spec</a></li>
+        <li><span class="rotulo">LinkedIn</span> <a class="vacio" href="https://www.linkedin.com/in/tu-perfil">[linkedin.com/in/tu-perfil]</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="cuerpo">
+
+    <!-- ===== COLUMNA PRINCIPAL ===== -->
+    <div class="principal">
+
+      <section class="perfil">
+        <h2>Perfil profesional</h2>
+        <p>
+          Estudiante de Tecnólogo en Análisis y Desarrollo de Software y Técnico en Sistemas del SENA,
+          apasionado por crear aplicaciones web y soluciones tecnológicas. Tengo experiencia práctica en
+          Frontend (HTML, CSS y JavaScript), Backend con PHP y bases de datos MySQL, adquirida en proyectos
+          académicos y personales. Busco una oportunidad para aportar a un equipo de desarrollo, aplicar
+          buenas prácticas y seguir creciendo como desarrollador Full Stack.
+        </p>
+      </section>
+
+      <section>
+        <h2>Proyecto destacado</h2>
+        <article class="ventana">
+          <div class="ventana-barra" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span>Proyecto académico</span>
+          </div>
+          <div class="ventana-cuerpo">
+            <h3>JE&amp;J Streetwear</h3>
+            <p class="tipo">Tienda virtual de ropa urbana · SENA</p>
+            <ul class="puntos">
+              <li>Desarrollé una tienda en línea completa, con interfaz web y lógica de servidor en PHP.</li>
+              <li>Diseñé y administré la base de datos en MySQL, trabajando en un entorno local con XAMPP.</li>
+              <li>Implementé la generación de documentos en PDF con la librería FPDF.</li>
+            </ul>
+            <ul class="tecnologias" aria-label="Tecnologías del proyecto">
+              <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>PHP</li><li>MySQL</li><li>XAMPP</li><li>FPDF</li>
+            </ul>
+            <a class="enlace-proyecto" href="https://github.com/juanjosesotoflorez-spec/JEJ-Streetwear">Ver el código en GitHub</a>
+          </div>
+        </article>
+      </section>
+
+      <section>
+        <h2>Educación</h2>
+
+        <article class="item">
+          <div class="item-cabecera">
+            <h3>Tecnólogo en Análisis y Desarrollo de Software</h3>
+            <span class="fecha">[Año] – En curso</span>
+          </div>
+          <p class="lugar">SENA · Medellín, Colombia</p>
+        </article>
+
+        <article class="item">
+          <div class="item-cabecera">
+            <h3>Técnico en Sistemas</h3>
+            <span class="fecha">[Año] – [Año]</span>
+          </div>
+          <p class="lugar">SENA · Medellín, Colombia</p>
+        </article>
+      </section>
+
+      <section>
+        <h2>Aprendiendo actualmente</h2>
+        <ul class="aprendizaje">
+          <li>Desarrollo web Full Stack</li>
+          <li>PHP y desarrollo Backend</li>
+          <li>JavaScript</li>
+          <li>Bases de datos y SQL</li>
+          <li>Git y GitHub</li>
+          <li>Buenas prácticas de desarrollo</li>
+          <li>Diseño y arquitectura de aplicaciones</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- ===== COLUMNA LATERAL ===== -->
+    <aside class="lateral">
+
+      <section>
+        <h2>Conocimientos técnicos</h2>
+
+        <div class="grupo">
+          <h3>Desarrollo web</h3>
+          <ul class="etiquetas">
+            <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>PHP</li>
+          </ul>
+        </div>
+
+        <div class="grupo">
+          <h3>Bases de datos</h3>
+          <ul class="etiquetas">
+            <li>MySQL</li><li>SQL</li>
+          </ul>
+        </div>
+
+        <div class="grupo">
+          <h3>Herramientas</h3>
+          <ul class="etiquetas">
+            <li>XAMPP</li><li>Git</li><li>GitHub</li><li>FPDF</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Habilidades blandas</h2>
+        <ul class="blandas">
+          <li>Aprendizaje continuo</li>
+          <li>Resolución de problemas</li>
+          <li>Trabajo en equipo</li>
+          <li>Responsabilidad y compromiso</li>
+          <li>Comunicación efectiva</li>
+        </ul>
+      </section>
+
+      <section class="idiomas">
+        <h2>Idiomas</h2>
+        <p>Español: nativo<br>Inglés: [tu nivel]</p>
+      </section>
+
+    </aside>
+  </div>
+</main>
+
+</body>
+</html>
