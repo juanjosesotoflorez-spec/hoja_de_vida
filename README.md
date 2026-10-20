@@ -72,8 +72,8 @@ Me encuentro en constante aprendizaje, fortaleciendo mis conocimientos en progra
 ## 📄 Mi hoja de vida
 
 <p align="center">
-  <a href="https://juanjosesotoflorez-spec.github.io/hoja-de-vida/">
-    <img src="https://juanjosesotoflorez-spec.github.io/hoja_de_vida/" alt="Consultar hoja de vida">
+  <a href="https://juanjosesotoflorez-spec.github.io/hoja_de_vida/">
+    <img src="https://img.shields.io/badge/CONSULTAR%20HOJA%20DE%20VIDA-0B132B?style=for-the-badge&logo=readthedocs&logoColor=5BC0BE" alt="Consultar hoja de vida">
   </a>
 </p>
 
